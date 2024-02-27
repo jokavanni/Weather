@@ -12,6 +12,7 @@ const getLocation = () => {
         navigator.geolocation.getCurrentPosition(position => {
             document.querySelector('#lat').innerHTML = position.coords.latitude.toFixed(3) + ', '
             document.querySelector('#lng').innerHTML = position.coords.longitude.toFixed(3)
+            getWeather(position.coords.latitude,position.coords.longitude)
         }),(error => {
             alert(error)
         })
@@ -29,6 +30,7 @@ const getWeather = (lat,lng) => {
     axios.get(address)
         .then(response => {
             const json = response.data
+            console.log(json)
             temp_span.innerHTML = json.main.temp + '&#8451;'
             speed_span.innerHTML = json.wind.speed + 'm/s'
             direction_span.innerHTML = json.wind.deg + '&#176;'
